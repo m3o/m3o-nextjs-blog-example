@@ -1,9 +1,10 @@
 import {NextPage} from 'next';
+import {LoginUserPayload} from '@m3o/m3o-node';
 import {useForm} from 'react-hook-form';
 import {Button} from '../components/Button';
 import {useAuth} from '../components/AuthProvider';
 
-type LoginFields = Required<Pick<m3oLoginUserData, 'email' | 'password'>>;
+type LoginFields = Required<Pick<LoginUserPayload, 'email' | 'password'>>;
 
 const Login: NextPage = () => {
   const {register, handleSubmit} = useForm<LoginFields>();

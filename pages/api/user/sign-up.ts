@@ -1,5 +1,5 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import {signUpUser} from '../../../m3o/user';
+import {user} from '../../../m3o/user';
 
 export default async function handler(
   req: NextApiRequest,
@@ -11,7 +11,7 @@ export default async function handler(
   }
 
   try {
-    await signUpUser(req.body);
+    await user.signUp(req.body);
     res.send({});
   } catch (e) {
     res.status(e.Code).send({

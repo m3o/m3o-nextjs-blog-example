@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@m3o/m3o-node": "^0.0.13",
+    "@m3o/m3o-node": "^0.0.18",
     "cookie": "^0.4.1",
     "next": "11.1.0",
     "react": "17.0.2",

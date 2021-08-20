@@ -1,4 +1,5 @@
 import {useRouter} from 'next/router';
+import {LoginUserResponse, UserAccount} from '@m3o/m3o-node';
 import {createContext, useEffect, useState, FC, useContext} from 'react';
 import {useCookies} from 'react-cookie';
 import {get, post} from '../lib/fetch';

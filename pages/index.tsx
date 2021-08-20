@@ -1,8 +1,9 @@
 import {NextPage, GetServerSideProps} from 'next';
+import {UserSession} from '@m3o/m3o-node';
 import Link from 'next/link';
 
 type HomeProps = {
-  user: m3oUserSession;
+  user: UserSession;
   posts: BlogPost[];
 };
 

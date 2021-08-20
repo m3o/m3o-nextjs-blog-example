@@ -1,10 +1,11 @@
 import {NextPageContext} from 'next';
 import cookie from 'cookie';
-import {getUserById, readSession} from './api';
+import {UserSession, LoginUserResponse, UserResponse} from '@m3o/m3o-node';
+import {user} from '.';
 
 export async function getUserFromServerRequestNextJs(
   req: NextPageContext['req'],
-): Promise<m3oUserSession> {
+): Promise<UserSession> {
   if (!req?.headers) return null;
   const cookies = cookie.parse(req.headers.cookie || '');
 
@@ -13,13 +14,13 @@ export async function getUserFromServerRequestNextJs(
   try {
     const microUserCookie = JSON.parse(
       cookies.session,
-    ) as m3oLoginUserResponse['session'];
+    ) as LoginUserResponse['session'];
 
-    await readSession(microUserCookie.id);
+    await user.readSession(microUserCookie.id);
 
-    const response = (await getUserById(
+    const response = (await user.getById(
       microUserCookie.userId,
-    )) as m3oUserResponse;
+    )) as UserResponse;
 
     return response.account;
   } catch (e) {

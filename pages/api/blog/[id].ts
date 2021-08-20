@@ -1,12 +1,12 @@
 import {NextApiRequest, NextApiResponse} from 'next';
-import {readDb} from '../../../m3o/db';
+import {postsDb} from '../../../lib/blog';
 
 type Query = {
   id: string;
 };
 
-export const fetchBlogPost = (id: string): Promise<BlogPost> =>
-  readDb({table: 'posts', id});
+export const fetchBlogPost = (id: string) =>
+  postsDb.read({table: 'posts', query: `id == "${id}"`});
 
 export default async function handler(
   req: NextApiRequest,
@@ -21,9 +21,11 @@ export default async function handler(
 
   try {
     const response = await fetchBlogPost(query.id);
-    console.log(response);
+    const [post] = response.records || [];
 
-    res.send({});
+    res.send({
+      post,
+    });
   } catch (e) {
     console.log(e);
   }

@@ -1,15 +1,13 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
-import {createRecord, readDb} from '../../../m3o/db';
+import {postsDb} from '../../../lib/blog';
 import {getUserFromServerRequestNextJs} from '../../../m3o/user/helpers';
 
-function fetchBlogPosts(): Promise<BlogPostsResponse> {
-  return readDb({table: 'posts'});
+function fetchBlogPosts() {
+  return postsDb.read({table: 'posts'});
 }
 
-function createBlogPost(
-  payload: CreateBlogPostFields,
-): Promise<BlogPostsResponse> {
-  return createRecord({table: 'posts', record: payload});
+function createBlogPost(payload: BlogPost) {
+  return postsDb.create({table: 'posts', record: payload});
 }
 
 async function createPost(req: NextApiRequest, res: NextApiResponse) {
@@ -26,8 +24,11 @@ async function createPost(req: NextApiRequest, res: NextApiResponse) {
       creator: user.id,
     });
 
+    // console.
+
     res.send({});
   } catch (e) {
+    console.log(e);
     res.status(500).send(e);
   }
 }

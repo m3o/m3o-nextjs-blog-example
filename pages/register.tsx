@@ -1,9 +1,10 @@
 import {NextPage} from 'next';
+import {CreateUserPayload} from '@m3o/m3o-node';
 import {useForm} from 'react-hook-form';
 import {useMutation} from 'react-query';
 import {post} from '../lib/fetch';
 
-type RegisterFormFields = Pick<m3oCreateUserData, 'email' | 'password'>;
+type RegisterFormFields = Pick<CreateUserPayload, 'email' | 'password'>;
 
 const Register: NextPage = () => {
   const mutation = useMutation((values: RegisterFormFields) =>
